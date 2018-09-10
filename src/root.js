@@ -4,6 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import HomePage from './containers/home';
 import LoginPage from './containers/login';
+import SignupPage from './containers/signup';
 import PrivateRoute from './containers/privateRoute';
 import configureStore from './configureStore';
 
@@ -18,6 +19,7 @@ class Root extends Component {
           <Switch>
             <PrivateRoute exact path="/" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/signup" component={SignupPage} />
           </Switch>
         </Router>
       </Provider>

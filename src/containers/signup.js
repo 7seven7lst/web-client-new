@@ -1,10 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { authenticate } from '../modules/auth/actions';
 
-class LoginPage extends React.Component {
+class SignupPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +17,16 @@ class LoginPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { email, password } = this.state;
-    this.props.dispatch(authenticate(email, password));
+    const password_confirmation = password;
+    return axios({
+      url: '/api/v1/auth',
+      method: 'POST',
+      data: { email, password, password_confirmation }
+    }).then(response => {
+      console.log("response is>>>", response);
+    }).catch(err => {
+      console.log("err is >>>", err);
+    })
   }
 
   render() {
@@ -57,13 +67,4 @@ class LoginPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth } = state;
-  const { loading, isAuthenticated } = auth;
-  return {
-    loading,
-    isAuthenticated
-  };
-}
-
-export default connect(mapStateToProps)(LoginPage);
+export default SignupPage;
