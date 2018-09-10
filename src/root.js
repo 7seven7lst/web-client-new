@@ -8,7 +8,6 @@ import PrivateRoute from './containers/privateRoute';
 import configureStore from './configureStore';
 
 const store = configureStore();
-
 const history = createBrowserHistory();
 
 class Root extends Component {
@@ -24,7 +23,6 @@ class Root extends Component {
       </Provider>
     );
   }
-
 }
 
 export default Root;

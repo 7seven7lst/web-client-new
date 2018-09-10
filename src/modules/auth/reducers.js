@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import * as action from './actions';
 import constants from './constants';
 
 // initialState
