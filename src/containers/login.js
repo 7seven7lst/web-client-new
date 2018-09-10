@@ -34,7 +34,7 @@ class LoginPage extends React.Component {
               type="email"
               name="email"
               id="loginEmail"
-              placeholder="with a placeholder"
+              placeholder="Email"
               value={this.state.email}
               onChange={(e) => this.setState({ email: e.target.value })}
             />
@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
               type="password"
               name="password"
               id="loginPassword"
-              placeholder="password placeholder"
+              placeholder="Password"
               value={this.state.password}
               onChange={(e) => this.setState({ password: e.target.value })}
             />

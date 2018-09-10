@@ -10,14 +10,19 @@ class SignupPage extends React.Component {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      firstname: '',
+      lastname: '',
+      zipcode: '',
+      phone: '',
+      confirm_password: '',
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { email, password } = this.state;
-    const password_confirmation = password;
+    const { email, password, firstname, lastname, zipcode, phone, password_confirmation } = this.state;
+    console.log("this.state is >>>", this.state);
     return axios({
       url: '/api/v1/auth',
       method: 'POST',
@@ -37,27 +42,82 @@ class SignupPage extends React.Component {
     return (
       <div className="container-fluid col-6 col-sm-6">
         <Form onSubmit={e => {this.handleSubmit(e)}}>
-          <FormText>Login</FormText>
+          <FormText>Signup</FormText>
           <FormGroup>
-            <Label for="loginEmail">Email</Label>
+            <Label for="signupEmail">Email</Label>
             <Input
               type="email"
               name="email"
-              id="loginEmail"
-              placeholder="with a placeholder"
+              id="signupEmail"
+              placeholder="Email"
               value={this.state.email}
               onChange={(e) => this.setState({ email: e.target.value })}
             />
           </FormGroup>
           <FormGroup>
-            <Label for="loginPassword">Password</Label>
+            <Label for="firstName">First Name</Label>
+            <Input
+              type="text"
+              name="firstname"
+              id="firstName"
+              placeholder="First Name"
+              value={this.state.firstname}
+              onChange={(e) => this.setState({ firstname: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="lastName">Last Name</Label>
+            <Input
+              type="text"
+              name="lastname"
+              id="lastName"
+              placeholder="Last Name"
+              value={this.state.lastname}
+              onChange={(e) => this.setState({ lastname: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="signupPhone">Phone</Label>
+            <Input
+              type="tel"
+              name="phone"
+              id="signupPhone"
+              placeholder="Phone"
+              value={this.state.phone}
+              onChange={(e) => this.setState({ phone: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="zipCode">Zip Code</Label>
+            <Input
+              type="number"
+              name="phone"
+              id="zipCode"
+              placeholder="Zip Code"
+              value={this.state.zipcode}
+              onChange={(e) => this.setState({ zipcode: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="signupPassword">Password</Label>
             <Input
               type="password"
               name="password"
-              id="loginPassword"
-              placeholder="password placeholder"
+              id="signupPassword"
+              placeholder="Password"
               value={this.state.password}
               onChange={(e) => this.setState({ password: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="passwordConfirm">Confirm Password</Label>
+            <Input
+              type="password"
+              name="confirm_password"
+              id="passwordConfirm"
+              placeholder="Confirm Password"
+              value={this.state.password_confirmation}
+              onChange={(e) => this.setState({ password_confirmation: e.target.value })}
             />
           </FormGroup>
           <Button className="btn btn-primary">Submit</Button>
@@ -67,4 +127,13 @@ class SignupPage extends React.Component {
   }
 }
 
-export default SignupPage;
+function mapStateToProps(state) {
+  const { auth } = state;
+  const { loading, isAuthenticated } = auth;
+  return {
+    loading,
+    isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(SignupPage);
